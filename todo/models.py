@@ -31,7 +31,7 @@ class HowtoOrder(models.Model):
     class Meta(object):
         db_table = 'how_to_order'
     ORDERS = [
-        ('creation_order', '作成された順'), ('due_order', '締め切り順')
+        ('creation_order', '作成された順'), ('due_order', '締め切り順'), ('priority_order', '優先度順')
     ]
     REVERSE = [
         ('ascending', '昇順'), ('descending', '降順')

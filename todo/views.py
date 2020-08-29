@@ -23,6 +23,12 @@ class TodoListView(ListView):
                 tasks = ToDoModel.objects.filter(status='doing').order_by('duedate')
             elif ascending_or_descending == 'descending':
                 tasks = ToDoModel.objects.filter(status='doing').order_by('-duedate')
+
+        elif order == 'priority_order':
+            if ascending_or_descending == 'ascending':
+                tasks = ToDoModel.objects.filter(status='doing').order_by('priority', 'duedate')
+            elif ascending_or_descending == 'descending':
+                tasks = ToDoModel.objects.filter(status='doing').order_by('-priority', 'duedate')
         context = {
             'tasks': tasks,
         }

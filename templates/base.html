@@ -15,7 +15,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="{%url 'list'%}">ToDoリスト</a>
+        <a class="navbar-brand" href="{%url 'list'%}">ToDoアプリ</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -24,13 +24,14 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'create' %}">予定を追加 <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{% url 'create' %}">タスクを追加 <span class="sr-only">(current)</span></a>
                 </li>
                 <li>
                     <a class="nav-link" href="{% url 'archive' %}">完了済みタスク <span class="sr-only">(current)</span></a>
                 </li>
                 <li>
-                    <a class="nav-link" href="{% url 'changeorder' 1 %}">並び順<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{% url 'changeorder' 1 %}">並び順を変更<span
+                            class="sr-only">(current)</span></a>
                 </li>
             </ul>
         </div>
