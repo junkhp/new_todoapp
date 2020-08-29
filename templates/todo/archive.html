@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">完了済みのタスク</h1>
+        <p class="lead">あなたはこれだけのタスクを完了しました．</p>
+        <a href="{% url 'list'%}" class="btn btn-warning btn-lg" tabindex="-1" role="button" aria-disabled="true">To Do
+            に戻る</a>
+
+    </div>
+</div>
+{% endblock header %}
+
+{% block content %}
+
+
+<div class="container">
+    {% for item in archive%}
+    <div class="alert alert-{{ item.priority }}" role="alert">
+        <p>{{item.title}}</p>
+        <p>期日：{{item.duedate}}</p>
+        <a href="{% url 'detail' item.pk%}" class="btn btn-info btn" tabindex="-1" role="button"
+            aria-disabled="true">詳細</a>
+        <a href="{% url 'update' item.pk %}" class="btn btn-primary btn" tabindex="-1" role="button"
+            aria-disabled="true">編集</a>
+        <a href="{% url 'delete' item.pk%}" class="btn btn-danger btn" tabindex="-1" role="button"
+            aria-disabled="true">削除</a>
+        <a href="{% url 'move' item.pk %}" class="btn btn-dark btn" tabindex="-1" role="button"
+            aria-disabled="true">戻す</a>
+    </div>
+
+    {% endfor %}
+</div>
+
+{% endblock content %}

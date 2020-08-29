@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">詳細画面</h1>
+        <p class="lead">タスクの詳細です</p>
+        <a href="{% url 'create'%}" class="btn btn-warning btn-lg" tabindex="-1" role="button"
+            aria-disabled="true">一覧に戻る</a>
+        <br>
+        <br>
+        <a href="{% url 'update' object.pk %}" class="btn btn-primary btn" tabindex="-1" role="button"
+            aria-disabled="true">編集</a>
+        <a href="{% url 'delete' object.pk%}" class="btn btn-danger btn" tabindex="-1" role="button"
+            aria-disabled="true">削除</a>
+        <a href="{% url 'move' object.pk%}" class="btn btn-success btn" tabindex="-1" role="button"
+            aria-disabled="true">
+
+            {% if object.status == 'doing'%}
+            完了
+            {% else %}
+            戻す
+            {% endif %}</a>
+    </div>
+</div>
+{% endblock header %}
+
+{% block content %}
+<div class="container">
+    <div class="alert alert-{{object.priority}}" role="alert">
+        <h1>タイトル：{{object.title}}</h1>
+        <p>詳細：{{object.memo}}</p>
+        <p>状態：
+
+            {% if object.status == 'doing' %}
+            未完了
+            {% else %}
+            完了
+            {% endif %}
+
+        </p>
+        <p>期日：{{object.duedate}}</p>
+    </div>
+</div>
+
+{% endblock content %}

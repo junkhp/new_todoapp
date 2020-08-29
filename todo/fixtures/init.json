@@ -1,0 +1,10 @@
+[
+    {
+        "model": "todo.HowtoOrder",
+        "pk": 1,
+        "fields": {
+            "order": "creation_order",
+            "ascending_or_descending": "ascending"
+        }
+    }
+]

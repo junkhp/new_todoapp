@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">TO DO アプリ</h1>
+        <p class="lead">日常のタスクを効率よく管理しよう！</p>
+        <a href="{% url 'create'%}" class="btn btn-warning btn-lg" tabindex="-1" role="button"
+            aria-disabled="true">タスクを追加</a>
+        <a href="{% url 'archive'%}" class="btn btn-dark btn-lg" tabindex="-1" role="button"
+            aria-disabled="true">完了済みのタスクを確認</a>
+    </div>
+</div>
+{% endblock header %}
+
+{% block content %}
+
+
+<div class="container">
+    {% for item in tasks %}
+    <div class="alert alert-{{ item.priority }}" role="alert">
+        <p>{{item.title}}</p>
+        <p>期日：{{item.duedate}}</p>
+        <a href="{% url 'detail' item.pk%}" class="btn btn-info btn" tabindex="-1" role="button"
+            aria-disabled="true">詳細</a>
+        <a href="{% url 'update' item.pk %}" class="btn btn-primary btn" tabindex="-1" role="button"
+            aria-disabled="true">編集</a>
+        <a href="{% url 'delete' item.pk%}" class="btn btn-danger btn" tabindex="-1" role="button"
+            aria-disabled="true">削除</a>
+        <a href="{% url 'move' item.pk%}" class="btn btn-warning btn" tabindex="-1" role="button"
+            aria-disabled="true">完了</a>
+    </div>
+
+    {% endfor %}
+</div>
+
+{% endblock content %}

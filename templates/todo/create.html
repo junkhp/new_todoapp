@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<div class="alert alert-secondary" role="alert">
+    <div class="container">
+        <p class="display-4">新しいタスクを追加</p>
+    </div>
+</div>
+{% endblock header %}
+
+{% block content %}
+<div class="container">
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="作成する">
+    </form>
+</div>
+{% endblock content %}
