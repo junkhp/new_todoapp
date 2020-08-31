@@ -3,13 +3,14 @@ from django.utils import timezone
 
 # Create your models here.
 
-PRIORITY = (('danger', '高い'), ('warning', '普通'), ('primary', '低い'))
 
-
+# タスクの情報のDB
 class ToDoModel(models.Model):
 
     class Meta(object):
         db_table = 'todo'
+
+    PRIORITY = (('danger', '高い'), ('warning', '普通'), ('primary', '低い'))
 
     STATUS_CHOICES = [
         ('doing', '未完了'),
@@ -25,6 +26,8 @@ class ToDoModel(models.Model):
 
     def __str__(self):
         return self.title
+
+# 並び順の方法を格納するDB．データが増えていくわけではないのでDBを使う必要はないと思いますが，他の方法がわからなかったのでとりあえずDBを使いました．
 
 
 class HowtoOrder(models.Model):
