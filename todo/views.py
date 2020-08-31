@@ -89,12 +89,15 @@ class TodoCreateView(View):
 
     def post(self, request, *args, **kwargs):
         form = CreateForm(request.POST)
-        form.save()
-        return redirect('list')
+        if form.is_valid():
+            form.save()
+            return redirect('list')
+        else:
+            return redirect('create')
 
 
 class TodoUpdateView(View):
-    '''タスクを追加'''
+    '''タスクを編集'''
 
     def get(self, request, pk, *args, **kwargs):
         task = ToDoModel.objects.get(pk=pk)
@@ -106,8 +109,11 @@ class TodoUpdateView(View):
     def post(self, request, pk, *args, **kwargs):
         task = ToDoModel.objects.get(pk=pk)
         form = UpdateForm(request.POST, instance=task)
-        form.save()
-        return redirect('list')
+        if form.is_valid():
+            form.save()
+            return redirect('list')
+        else:
+            return redirect('create')
 
 
 class HowtoOrderUpdateView(UpdateView):
