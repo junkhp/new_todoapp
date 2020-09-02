@@ -28,8 +28,7 @@
 {% block content %}
 <div class="container">
     <div class="alert alert-{{object.priority}}" role="alert">
-        <h1>タイトル：{{object.title}}</h1>
-        <p>詳細：</p>
+        <h1>{{object.title}}</h1>
         <p> {{object.memo}}</p>
         <p>優先度:{{object.get_priority_display}}</p>
         <p>状態：
