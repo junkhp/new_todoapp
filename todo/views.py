@@ -5,6 +5,9 @@ from django.urls import reverse_lazy
 from django.views import View
 from .forms import CreateForm, UpdateForm
 from django import forms
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
@@ -122,3 +125,42 @@ class HowtoOrderUpdateView(UpdateView):
     template_name = "todo/update_order.html"
     fields = '__all__'
     success_url = reverse_lazy('list')
+
+
+class SignupView(View):
+    '''サインアップ'''
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'todo/signup.html')
+
+    def post(self, request, *args, **kwargs):
+        username = request.POST['username']
+        password = request.POST['password']
+        try:
+            User.objects.get(username=username)
+            return render(request, 'boardapp/signup.html', {'error': 'このユーザー名は既に登録されています．'})
+        except:
+            user = User.objects.create_user(username, '', password)
+            return redirect('login')
+
+
+class LoginView(View):
+    '''ログイン'''
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'todo/login.html')
+
+    def post(self, request, *args, **kwargs):
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('list')
+        else:
+            return redirect('login')
+
+
+def logoutfunc(request):
+    logout(request)
+    return redirect('login')

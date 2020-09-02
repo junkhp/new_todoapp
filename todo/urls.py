@@ -12,4 +12,7 @@ urlpatterns = [
     path('archive/', views.TodoArchiveView.as_view(), name='archive'),
     path('move/<int:pk>', views.task_status_move, name='move'),
     path('changeorder/<int:pk>', views.HowtoOrderUpdateView.as_view(), name='changeorder'),
+    path('signup/', views.SignupView.as_view(), name='signup'),
+    path('login/', views.LoginView.as_view(), name='login'),
+    path('logout/', views.logoutfunc, name='logout'),
 ]
