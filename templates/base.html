@@ -28,6 +28,9 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
+                    <a class="navbar-brand">{{user.username}}</a>
+                </li>
+                <li class="nav-item active">
                     <a class="nav-link" href="{% url 'create' %}">タスクを追加<span class="sr-only">(current)</span></a>
                 </li>
                 <li>
@@ -36,6 +39,9 @@
                 <li>
                     <a class="nav-link" href="{% url 'changeorder' 1 %}">並び順を変更<span
                             class="sr-only">(current)</span></a>
+                </li>
+                <li>
+                    <a class="nav-link" href="{% url 'logout' %}">ログアウト<span class="sr-only">(current)</span></a>
                 </li>
             </ul>
         </div>

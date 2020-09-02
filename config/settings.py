@@ -51,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'global_login_required.GlobalLoginRequiredMiddleware',  # ログインしていなくてもアクセスできるページを指定
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -115,6 +116,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+PUBLIC_PATHS = [
+    '/login/',
+    '/admin/',
+    '/signup/',
+]
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -129,6 +136,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+LOGIN_URL = 'login'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/

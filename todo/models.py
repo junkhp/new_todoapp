@@ -24,13 +24,15 @@ class ToDoModel(models.Model):
     status = models.CharField(max_length=50, choices=STATUS_CHOICES,
                               verbose_name='状況', default='doing')
 
-    def __str__(self):
-        return self.title
+    user_name = models.CharField(max_length=200, verbose_name='ユーザー名')
 
-# 並び順の方法を格納するDB．データが増えていくわけではないのでDBを使う必要はないと思いますが，他の方法がわからなかったのでとりあえずDBを使いました．
+    def __str__(self):
+        return '作成者：' + self.user_name + ', タイトル：' + self.title
 
 
 class HowtoOrder(models.Model):
+    # 並び順の方法を格納するDB．データが増えていくわけではないのでDBを使う必要はないと思いますが，他の方法がわからなかったのでとりあえずDBを使いました．
+    # Userクラスを継承して並び順のfieldを追加する方が一般的？
     class Meta(object):
         db_table = 'how_to_order'
     ORDERS = [
@@ -42,7 +44,8 @@ class HowtoOrder(models.Model):
     order = models.CharField(max_length=50, verbose_name='並び順',
                              choices=ORDERS, default='creation_order')
     ascending_or_descending = models.CharField(max_length=50, verbose_name='昇順か降順か',
-                                               choices=REVERSE, default='descending')
+                                               choices=REVERSE, default='ascending')
+    user_name = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.order
+        return self.user_name
