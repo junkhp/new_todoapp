@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'global_login_required.GlobalLoginRequiredMiddleware',  # ログインしていなくてもアクセスできるページを指定
+    'global_login_required.GlobalLoginRequiredMiddleware',  # ログインしていなくてもアクセスできるページを指定
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -116,11 +116,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# PUBLIC_PATHS = [
-#     '/login/',
-#     '/admin/',
-#     '/signup/',
-# ]
+PUBLIC_PATHS = [
+    '/login/',
+    '/admin/',
+    '/signup/',
+]
 
 
 # Internationalization
