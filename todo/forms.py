@@ -1,7 +1,5 @@
 from django import forms
-from .models import ToDoModel, HowtoOrder
-
-# 新しいタスクを作成するときのフォーム
+from .models import ToDoModel, CustomUser
 
 
 class CreateForm(forms.ModelForm):
@@ -13,8 +11,6 @@ class CreateForm(forms.ModelForm):
         widgets = {
             'duedate': forms.SelectDateWidget
         }
-
-# 既存のタスクに修正を加える時のフォーム
 
 
 class UpdateForm(forms.ModelForm):
@@ -31,5 +27,5 @@ class UpdateForm(forms.ModelForm):
 class ChangeOrderForm(forms.ModelForm):
     '''並び順を変更するときのフォーム'''
     class Meta:
-        model = HowtoOrder
+        model = CustomUser
         fields = ('order', 'ascending_or_descending')

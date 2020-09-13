@@ -1,10 +1,10 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, DeleteView, UpdateView
-from .models import ToDoModel, HowtoOrder
+from .models import ToDoModel, CustomUser
 from django.urls import reverse_lazy
 from django.views import View
 from .forms import CreateForm, UpdateForm, ChangeOrderForm
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -19,10 +19,13 @@ class TodoListView(ListView):
         # ログイン中のユーザー名を取得
         user_name = request.user.username
         # ユーザーに対応したリストの表示順の方法を取得(作成した順，締め切り順，優先度順)
-        order = HowtoOrder.objects.get(user_name=user_name).order
+        # order = HowtoOrder.objects.get(user_name=user_name).order
+        order = CustomUser.objects.get(username=user_name).order
         # 昇順か降順を取得
-        ascending_or_descending = HowtoOrder.objects.get(
-            user_name=user_name).ascending_or_descending
+        # ascending_or_descending = HowtoOrder.objects.get(
+        # user_name=user_name).ascending_or_descending
+        ascending_or_descending = CustomUser.objects.get(
+            username=user_name).ascending_or_descending
 
         # ログイン中のユーザーのタスクを取得
         user_tasks = ToDoModel.objects.filter(user_name=user_name)
@@ -135,7 +138,7 @@ class HowtoOrderUpdateView(View):
     def get(self, request, *args, **kwargs):
         # ログイン中のユーザー名を取得
         user_name = request.user.username
-        order = HowtoOrder.objects.get(user_name=user_name)
+        order = CustomUser.objects.get(username=user_name)
         context = {
             'form': ChangeOrderForm(instance=order),
         }
@@ -144,7 +147,7 @@ class HowtoOrderUpdateView(View):
     def post(self, request, *args, **kwargs):
         # ログイン中のユーザー名を取得
         user_name = request.user.username
-        order = HowtoOrder.objects.get(user_name=user_name)
+        order = CustomUser.objects.get(username=user_name)
         form = ChangeOrderForm(request.POST, instance=order)
         if form.is_valid():
             form.save()
@@ -173,12 +176,12 @@ class SignupView(View):
 
         # ユーザーを追加
         try:
-            User.objects.get(username=username)
+            CustomUser.objects.get(username=username)
             return render(request, 'todo/signup.html', {'error': 'このユーザー名は既に登録されています．'})
         except:
-            user = User.objects.create_user(username, '', password)
+            user = CustomUser.objects.create_user(username, '', password)
             # 新しいユーザーが作成されたタイミングで並び順モデルに新しいデータを追加
-            HowtoOrder.objects.create(user_name=username)
+            # HowtoOrder.objects.create(user_name=username)
             return redirect('login')
 
 

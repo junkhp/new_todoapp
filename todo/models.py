@@ -1,7 +1,29 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.signals import user_logged_in
 
 # Create your models here.
+
+
+class CustomUser(AbstractUser):
+    '''カスタムユーザークラス'''
+    class Meta(object):
+        db_table = 'custom_user'
+    ORDERS = [
+        ('creation_order', '作成された順'), ('due_order', '締め切り順'), ('priority_order', '優先度順')
+    ]
+    REVERSE = [
+        ('ascending', '昇順'), ('descending', '降順')
+    ]
+    order = models.CharField(max_length=50, verbose_name='並び順',
+                             choices=ORDERS, default='creation_order')
+    ascending_or_descending = models.CharField(max_length=50, verbose_name='昇順か降順か',
+                                               choices=REVERSE, default='ascending')
+
+    def __str__(self):
+        return self.username
 
 
 # タスクの情報のDB
@@ -25,27 +47,7 @@ class ToDoModel(models.Model):
                               verbose_name='状況', default='doing')
 
     user_name = models.CharField(max_length=200, verbose_name='ユーザー名')
+    # user_name = models.ForeignKey(User, verbose_name='ユーザー名', on_delete=models.CASCADE)
 
     def __str__(self):
         return '作成者：' + self.user_name + ', タイトル：' + self.title
-
-
-class HowtoOrder(models.Model):
-    # 並び順の方法を格納するDB．データが増えていくわけではないのでDBを使う必要はないと思いますが，他の方法がわからなかったのでとりあえずDBを使いました．
-    # Userクラスを継承して並び順のfieldを追加する方が一般的？
-    class Meta(object):
-        db_table = 'how_to_order'
-    ORDERS = [
-        ('creation_order', '作成された順'), ('due_order', '締め切り順'), ('priority_order', '優先度順')
-    ]
-    REVERSE = [
-        ('ascending', '昇順'), ('descending', '降順')
-    ]
-    order = models.CharField(max_length=50, verbose_name='並び順',
-                             choices=ORDERS, default='creation_order')
-    ascending_or_descending = models.CharField(max_length=50, verbose_name='昇順か降順か',
-                                               choices=REVERSE, default='ascending')
-    user_name = models.CharField(max_length=200)
-
-    def __str__(self):
-        return self.user_name
