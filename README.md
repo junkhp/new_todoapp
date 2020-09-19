@@ -1,6 +1,8 @@
 # new_todoapp
 日々のタスクを管理するTODOアプリです．
 
+Python+Djangoで作成しました
+
 Herokuにデプロイしています.
 
 [todoアプリ](https://django-todoapp-new.herokuapp.com/list/)
@@ -39,10 +41,12 @@ source myvenv/bin/activate
 pip install -r requirents.txt
 ```
 
+モデルをmigrate
 ```python
 python manage.py migrate
 ```
 
+アプリを実行
 ```bash
 python manage.py runserver
 ```
