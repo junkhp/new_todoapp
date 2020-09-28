@@ -12,7 +12,16 @@ Herokuにデプロイしています.
 ![](https://github.com/junkhp/new_todoapp/blob/master/images/demo.png)
 
 # Features
-タスクの作成・更新・削除・一覧表示・詳細表示に加えて，一覧の並べ替え，完了済みタスクの一覧表示が可能です．
+## 機能
+- ユーザー登録，ログイン，ログアウト
+- ログインしているユーザーのタスク一覧表示
+- ログインしているユーザーの完了済みタスク一覧表示
+- タスクの作成
+- タスクの更新
+- タスクの削除
+- タスクの詳細表示
+- タスクを更新済みにする
+- 作成順・締め切り順・優先度順によるタスクの並べ替え
 
 
 # 開発環境
@@ -32,11 +41,7 @@ git clone https://github.com/junkhp/new_todoapp.git
 ```linux
 cd new_todoapp/
 ```
-仮想環境を起動
-```linux
-source myvenv/bin/activate
-```
-必要なライブラリをインストール
+仮想環境を起動し，必要なライブラリをインストール
 ```bash
 pip install -r requirents.txt
 ```
