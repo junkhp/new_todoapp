@@ -101,7 +101,7 @@ class TodoCreateView(View):
         context = {
             'form': CreateForm(),
         }
-        return render(request, 'todo/create.html', context)
+        return render(request, 'todo/create2.html', context)
 
     def post(self, request, *args, **kwargs):
         form = CreateForm(request.POST)
